@@ -75,6 +75,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  var selectedIndex = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -83,6 +84,12 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: const OffersPage(),
       bottomNavigationBar: BottomNavigationBar(
+          currentIndex: selectedIndex,
+          onTap: (newIndex) {
+            setState(() {
+              selectedIndex = newIndex;
+            });
+          },
           backgroundColor: Theme.of(context).primaryColor,
           selectedItemColor: Colors.amber.shade200,
           unselectedItemColor: Colors.brown.shade50,
