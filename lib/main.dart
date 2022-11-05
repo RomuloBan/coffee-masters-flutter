@@ -76,13 +76,26 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   var selectedIndex = 0;
+  Widget currentWidgetPage = const Text("Menu");
+
   @override
   Widget build(BuildContext context) {
+    switch (selectedIndex) {
+      case 0:
+        currentWidgetPage = const Text("Menu");
+        break;
+      case 1:
+        currentWidgetPage = const OffersPage();
+        break;
+      case 2:
+        currentWidgetPage = const Text("Order");
+        break;
+    }
     return Scaffold(
       appBar: AppBar(
         title: Center(child: Image.asset("images/logo.png")),
       ),
-      body: const OffersPage(),
+      body: currentWidgetPage,
       bottomNavigationBar: BottomNavigationBar(
           currentIndex: selectedIndex,
           onTap: (newIndex) {
