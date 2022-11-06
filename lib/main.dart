@@ -8,52 +8,6 @@ void main() {
   runApp(const MyApp());
 }
 
-class Greet extends StatefulWidget {
-  const Greet({super.key});
-
-  @override
-  State<Greet> createState() => _GreetState();
-}
-
-class _GreetState extends State<Greet> {
-  var name = "";
-  @override
-  Widget build(BuildContext context) {
-    var greetStyle = const TextStyle(fontSize: 24);
-    return Column(children: [
-      Row(
-        children: [
-          Text(
-            "Hello $name",
-            style: greetStyle,
-          ),
-          Text(
-            "!!!",
-            style: greetStyle,
-          ),
-        ],
-      ),
-      Padding(
-        padding: const EdgeInsets.only(left: 20.0),
-        child: TextField(
-          onChanged: (value) => setState(() {
-            name = value;
-          }),
-        ),
-      ),
-    ]);
-  }
-}
-
-class HelloWorld extends StatelessWidget {
-  const HelloWorld({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const Text("Hello Flutter");
-  }
-}
-
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
