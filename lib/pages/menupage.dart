@@ -87,7 +87,7 @@ class ProductItem extends StatelessWidget {
                     Padding(
                       padding:
                           const EdgeInsets.only(left: 20.0, top: 8, bottom: 8),
-                      child: Text("\$${product.price}"),
+                      child: Text("\$${product.price.toStringAsFixed(2)}"),
                     ),
                   ],
                 ),
