@@ -30,7 +30,9 @@ class MenuPage extends StatelessWidget {
                       var product = categories[index].products[productIndex];
                       return ProductItem(
                         product: product,
-                        onAdd: (p) => {dataManager.cartAdd(p)},
+                        onAdd: (p) {
+                          dataManager.cartAdd(p);
+                        },
                       );
                     },
                   ),
