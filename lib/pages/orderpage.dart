@@ -2,19 +2,26 @@ import 'package:coffee_masters_flutter/datamanager.dart';
 import 'package:coffee_masters_flutter/datamodel.dart';
 import 'package:flutter/material.dart';
 
-class OrderPage extends StatelessWidget {
+class OrderPage extends StatefulWidget {
   final DataManager dataManager;
   const OrderPage({super.key, required this.dataManager});
 
   @override
+  State<OrderPage> createState() => _OrderPageState();
+}
+
+class _OrderPageState extends State<OrderPage> {
+  @override
   Widget build(BuildContext context) {
     return ListView.builder(
-      itemCount: dataManager.cart.length,
+      itemCount: widget.dataManager.cart.length,
       itemBuilder: (context, index) {
         return OrderItem(
-          item: dataManager.cart[index],
+          item: widget.dataManager.cart[index],
           onRemove: (product) {
-            dataManager.cartRemove(product);
+            setState(() {
+              widget.dataManager.cartRemove(product);
+            });
           },
         );
       },
