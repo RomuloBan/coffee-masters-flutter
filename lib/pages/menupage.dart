@@ -27,9 +27,10 @@ class MenuPage extends StatelessWidget {
                     physics: const ClampingScrollPhysics(),
                     itemCount: categories[index].products.length,
                     itemBuilder: (context, productIndex) {
+                      var product = categories[index].products[productIndex];
                       return ProductItem(
-                        product: categories[index].products[productIndex],
-                        onAdd: () {},
+                        product: product,
+                        onAdd: (p) => {dataManager.cartAdd(p)},
                       );
                     },
                   ),
