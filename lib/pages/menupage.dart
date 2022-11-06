@@ -10,17 +10,32 @@ class MenuPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return FutureBuilder(
       future: dataManager.getMenu(),
-      builder: ((context, snapshot) {
+      builder: (context, snapshot) {
         if (snapshot.hasData) {
           var categories = snapshot.data!;
           return ListView.builder(
             itemCount: categories.length,
-            itemBuilder: ((context, index) {
-              return Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(categories[index].name),
+            itemBuilder: (context, index) {
+              return Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(categories[index].name),
+                  ),
+                  ListView.builder(
+                    shrinkWrap: true,
+                    physics: const ClampingScrollPhysics(),
+                    itemCount: categories[index].products.length,
+                    itemBuilder: (context, productIndex) {
+                      return ProductItem(
+                        product: categories[index].products[productIndex],
+                        onAdd: () {},
+                      );
+                    },
+                  ),
+                ],
               );
-            }),
+            },
           );
         } else {
           if (snapshot.hasError) {
@@ -29,7 +44,7 @@ class MenuPage extends StatelessWidget {
             return const CircularProgressIndicator();
           }
         }
-      }),
+      },
     );
   }
 }
@@ -52,7 +67,7 @@ class ProductItem extends StatelessWidget {
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Image.asset("images/black_coffee.png"),
+                Image.network(product.imgUrl),
               ],
             ),
             Row(
