@@ -8,26 +8,29 @@ class MenuPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView(children: [
-      ProductItem(
-        product: Product(
-          id: 1,
-          name: "Dummy Product",
-          price: 1.25,
-          image: "images/black_coffee.png",
-        ),
-        onAdd: () {},
-      ),
-      ProductItem(
-        product: Product(
-          id: 1,
-          name: "Capuccino",
-          price: 1.25,
-          image: "images/black_coffee.png",
-        ),
-        onAdd: () {},
-      )
-    ]);
+    return FutureBuilder(
+      future: dataManager.getMenu(),
+      builder: ((context, snapshot) {
+        if (snapshot.hasData) {
+          var categories = snapshot.data!;
+          return ListView.builder(
+            itemCount: categories.length,
+            itemBuilder: ((context, index) {
+              return Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(categories[index].name),
+              );
+            }),
+          );
+        } else {
+          if (snapshot.hasError) {
+            return const Text("There was an error");
+          } else {
+            return const CircularProgressIndicator();
+          }
+        }
+      }),
+    );
   }
 }
 

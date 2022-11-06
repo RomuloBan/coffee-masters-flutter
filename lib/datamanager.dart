@@ -11,6 +11,7 @@ class DataManager {
     const url = "https://firtman.github.io/coffeemasters/api/menu.json";
     var response = await http.get(Uri.parse(url));
     if (response.statusCode == 200) {
+      _menu = [];
       var body = response.body;
       var decodeData = jsonDecode(body) as List<dynamic>;
       for (var json in decodeData) {
