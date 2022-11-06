@@ -13,19 +13,23 @@ class OrderPage extends StatefulWidget {
 class _OrderPageState extends State<OrderPage> {
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      itemCount: widget.dataManager.cart.length,
-      itemBuilder: (context, index) {
-        return OrderItem(
-          item: widget.dataManager.cart[index],
-          onRemove: (product) {
-            setState(() {
-              widget.dataManager.cartRemove(product);
-            });
-          },
-        );
-      },
-    );
+    if (widget.dataManager.cart.isEmpty) {
+      return const Text("Your order is empty.");
+    } else {
+      return ListView.builder(
+        itemCount: widget.dataManager.cart.length,
+        itemBuilder: (context, index) {
+          return OrderItem(
+            item: widget.dataManager.cart[index],
+            onRemove: (product) {
+              setState(() {
+                widget.dataManager.cartRemove(product);
+              });
+            },
+          );
+        },
+      );
+    }
   }
 }
 
